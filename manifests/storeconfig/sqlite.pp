@@ -6,7 +6,6 @@ class puppet::storeconfig::sqlite {
     ensure  => 'present',
     section => 'master',
     path    => $puppet::params::puppet_conf,
-    require => File[$puppet::params::puppet_conf],
   }
 
   ini_setting {

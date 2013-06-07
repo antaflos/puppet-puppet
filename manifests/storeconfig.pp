@@ -27,7 +27,6 @@ class puppet::storeconfig (
     ensure  => 'present',
     section => 'master',
     path    => $puppet::params::puppet_conf,
-    require => File[$puppet::params::puppet_conf],
   }
 
   if $backend != '' {

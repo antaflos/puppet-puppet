@@ -7,7 +7,6 @@ class puppet::server::config {
     path    => $puppet::params::puppet_conf,
     ensure  => 'present',
     section => 'master',
-    require => File[$puppet::params::puppet_conf],
   }
 
   ini_setting {
@@ -59,7 +58,7 @@ class puppet::server::config {
 
   if $puppet::server::report {
     ini_setting {
-      'report':
+      'master_report':
         setting => 'report',
         value   => $puppet::server::report;
       'reporturl':

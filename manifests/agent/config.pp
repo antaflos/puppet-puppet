@@ -1,10 +1,10 @@
 class puppet::agent::config {
-  include puppet
+  include puppet::params
 
   Ini_setting {
     path    => $puppet::params::puppet_conf,
     ensure  => 'present',
-    require => File[$puppet::params::puppet_conf],
+    #require => File[$puppet::params::puppet_conf],
   }
 
   ini_setting { 'server':
@@ -85,12 +85,6 @@ class puppet::agent::config {
     section => 'agent',
     setting => 'environment',
     value   => $::environment,
-  }
-
-  ini_setting { 'report':
-    section => 'agent',
-    setting => 'report',
-    value   => 'true',
   }
 
   ini_setting { 'show_diff':
