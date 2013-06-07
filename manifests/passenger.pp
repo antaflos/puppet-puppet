@@ -32,11 +32,16 @@ class puppet::passenger {
     }
   }
 
-  apache::vhost{ 'puppetmaster':
-    port     => '8140',
-    priority => '10',
-    docroot  => '/etc/puppet/rack/public/',
-    ssl      => true,
-    template => 'puppet/vhost/apache/passenger.conf.erb',
+  apache::vhost { $::fqdn:
+    port            => '8140',
+    priority        => '10',
+    docroot         => '/etc/puppet/rack/public/',
+    options         => 'None',
+    ssl             => true,
+    ssl_cert        => "/var/lib/puppet/ssl/certs/${::certname}.pem",
+    ssl_key         => "/var/lib/puppet/ssl/private_keys/${::certname}.pem",
+    ssl_chain       => '/var/lib/puppet/ssl/certs/ca.pem',
+    ssl_ca          => '/var/lib/puppet/ssl/certs/ca.pem',
+    custom_fragment => template('puppet/vhost/apache/passenger.conf.erb'),
   }
 }
